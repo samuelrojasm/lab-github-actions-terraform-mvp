@@ -22,9 +22,10 @@
     - Puede usar **Docker containers** para simular los runners de GitHub.
     - Soporta eventos simulados, como `push`, `pull_request`, `workflow_dispatch`, etc.
     - Permite pasar secrets y variables como si fueran del entorno real de GitHub Actions.
-    
+
 > [!NOTE]
-> Internamente, `act` crea contenedores **Docker** que simulan los **GitHub runners**, por lo que necesitas tener Docker instalado.
+> Internamente, `act` crea contenedores **Docker** que simulan<br>
+> los **GitHub runners**, por lo que necesitas tener Docker instalado.
 
 #### 🔗 Referencias workflows localmente con `act`
 - [act to run the actions locally](https://github.com/nektos/act)
