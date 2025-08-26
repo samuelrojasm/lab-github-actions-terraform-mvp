@@ -10,7 +10,7 @@
 ### Índice Week 01
 - [Ejecutar workflows localmente con "act"](#local-act)
 - [Beneficios de usar act con Terraform](#act-terraform)
-- [](#)
+- [Archivo terraform.tfstate en act](#act-tfstate)
 
 ---
 
@@ -53,6 +53,40 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 > - En tu repo: deja `terraform plan` siempre.
 > - Haz que `terraform apply` solo ocurra bajo condiciones seguras (manual approval o rama `main`).
 > - Localmente con `act`: puedes probar que el workflow funciona (hasta el `plan`).
+
+---
+
+### ⚡ act y terraform.tfstate <a name="act-tfstate"></a>
+#### ¿Cómo maneja `act` los contenedores?
+- `act` lanza contenedores efímeros de Docker que simulan a los runners de GitHub Actions.
+- Cada ejecución de act (`act` o `act -j terraform`) levanta un contenedor nuevo desde cero.
+- Al terminar, ese contenedor se destruye → cualquier archivo generado dentro del contenedor se pierde.
+#### ¿Qué pasa con el `terraform.tfstate`?
+- Si usas **backend local** (por defecto):
+    - El `terraform.tfstate` se guarda dentro del contenedor.
+    - Como el contenedor se destruye al finalizar, ese state se pierde en cada ejecución de act.
+    - Resultado: Terraform siempre cree que es el primer init/plan.
+- Si usas **backend remoto** (recomendado):
+    - Ejemplo: S3 + DynamoDB en AWS, GCS en GCP, Azure Storage.
+    - El state se guarda en la nube, fuera del contenedor.
+    - Da igual si corres en GitHub Actions o con `act`: el state es persistente.
+- Si quieres mantener state local entre ejecuciones de `act`:
+    - Puedes **montar un volumen de Docker** desde tu host al contenedor de `act` para que guarde `terraform.tfstate` fuera del contenedor.
+    - Ejemplo:
+        ```bash
+        # Esto monta tu repo local en el contenedor, por lo que terraform.tfstate se queda en tu máquina.
+        act -b --bind
+        ```
+#### Resumen
+- Cada `act` levanta un contenedor nuevo (efímero).
+- Con **backend local** → pierdes el `state` con cada ejecución.
+- Con **backend remoto** → el `state` se mantiene (mejor práctica en IaC).
+- **Alternativa**: montar un volumen local con `act` para que el state quede persistente en tu máquina.
+
+> [!NOTE]
+> **Lo típico en un proyecto serio es:**<br>
+> - Usar `plan` con `act` para validar que el workflow corre bien.
+> - Usar backend remoto para el `state`, y dejar el `apply` solo en GitHub Actions (con approval).
 
 ---
 
