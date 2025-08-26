@@ -5,13 +5,26 @@
 - Permite ejecutar workflows completos o **jobs** específicos sin necesidad de hacer push al repositorio remoto.
 - Soporta eventos simulados: `push`, `pull_request`, `workflow_dispatch`, etc.
 
-## ⚙️ Comandos
-- Comandos de uo de `act`
+## ⚙️ Instalar
+1. Instalar en macOS:
     ```bash
     # Instalar act (en MacOS con Homebrew)
     brew install act
+    act --version
     ```
 
+    ```bash
+    # Verifica la versión de act
+    act --version
+    ```
+
+## ⚙️ Comandos
+-  Iniciar Docker Desktop en macOS:
+    ```bash
+    open -a Docker
+    ```
+
+- Comandos de uo de `act`
     ```bash
     # Ejecutar el workflow por defecto (evento push)
     act
@@ -33,6 +46,8 @@
     ```
 
 ---
+
+
 
 
 ---

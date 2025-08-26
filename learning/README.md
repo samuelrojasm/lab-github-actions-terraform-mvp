@@ -1,4 +1,4 @@
-# 🧪 Diario de aprendizaje del lab: AWS Lambda + Terraform
+# 🧪 Diario de aprendizaje del lab: Github Actions + Terraform + act
 
 ## Índide de Semanas
 - [Week 01](#week-01)
@@ -74,7 +74,7 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
     - Puedes **montar un volumen de Docker** desde tu host al contenedor de `act` para que guarde `terraform.tfstate` fuera del contenedor.
     - Ejemplo:
         ```bash
-        # Esto monta tu repo local en el contenedor, por lo que terraform.tfstate se queda en tu máquina.
+        # monta tu repo local en el contenedor, por lo que terraform.tfstate se queda en tu máquina.
         act -b --bind
         ```
 #### Resumen

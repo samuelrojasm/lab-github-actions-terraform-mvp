@@ -3,10 +3,14 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
 ## 🎯 Objetivos
+La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejores prácticas: `terraform plan` automático en cada `push` y `terraform apply` manual via `workflow_dispatch`. Empezamos con `backend local`, luego podemos migrar a remoto como mejora.
 
 ---
 
 ## ⚙ Tecnolgías usadas
+- Git Hub Actions
+- Terraform
+- act
 
 ---
 
