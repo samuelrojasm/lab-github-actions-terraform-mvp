@@ -1,5 +1,10 @@
 # 🧪 Guia de uso de "act" en Git Hub Actions
 
+## ⚙️ ¿Qué es act?
+- Es una herramienta de línea de comandos que simula los runners de **GitHub Actions** localmente usando Docker.
+- Permite ejecutar workflows completos o **jobs** específicos sin necesidad de hacer push al repositorio remoto.
+- Soporta eventos simulados: `push`, `pull_request`, `workflow_dispatch`, etc.
+
 ## ⚙️ Comandos
 - Comandos de uo de `act`
     ```bash
