@@ -39,7 +39,7 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 - **Prueba de secrets y variables locales**: Puedes pasar variables de Terraform o credenciales temporales sin afectar los entornos remotos.
 
 > [!NOTE]
-> **Problemas que ayuda a superar**<br>
+> **Problemas que ayuda a superar**
 > - Errores de workflow detectados tarde (solo al hacer push)
 > - Cambios de infraestructura que rompen entornos de prueba o producción
 > - Largas esperas de ejecución de GitHub Actions para cada cambio menor
