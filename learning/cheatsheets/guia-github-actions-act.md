@@ -18,14 +18,13 @@
     ```
 
     ```bash
-    # Pasar secrets
-    act -s MY_SECRET=valor
+   # Pasar secrets locales como variables de Terraform
+   act -s TF_VAR_region=us-east-1 -s AWS_ACCESS_KEY_ID=xxx -s AWS_SECRET_ACCESS_KEY=xxx
     ```
 
-
     ```bash
-    # Ejecutar un job específico
-    act -j nombre_del_job
+    # Ejecuta solo el job 'terraform'
+    act -j terraform
     ```
 
 ---

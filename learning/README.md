@@ -49,7 +49,12 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 > - Dificultad para depurar errores de configuración de Terraform en el CI/CD
 
 > [!TIP]
-> Lo más común es usar `act` para probar hasta el `terraform plan` y reservar el `apply` para el pipeline en GitHub Actions (con approvals).
+> - Lo más común es usar `act` para probar hasta el `terraform plan` y reservar el `apply` para el pipeline en GitHub Actions (con approvals).
+> - En tu repo: deja `terraform plan` siempre.
+> - Haz que `terraform apply` solo ocurra bajo condiciones seguras (manual approval o rama `main`).
+> - Localmente con `act`: puedes probar que el workflow funciona (hasta el `plan`).
+
+---
 
 #### 🔗 Referencias
 - [file Function](https://developer.hashicorp.com/terraform/language/functions/file)
