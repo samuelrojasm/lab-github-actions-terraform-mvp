@@ -24,7 +24,7 @@
     - Soporta eventos simulados, como `push`, `pull_request`, `workflow_dispatch`, etc.
     - Permite pasar secrets y variables como si fueran del entorno real de GitHub Actions.
 
-#### 🔗 Referencias templatefile()
+#### 🔗 Referencias workflows localmente con `act`
 - [act to run the actions locally](https://github.com/nektos/act)
 
 ---
@@ -39,13 +39,16 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 - **Prueba de secrets y variables locales**: Puedes pasar variables de Terraform o credenciales temporales sin afectar los entornos remotos.
 
 > [!NOTE]
-> **Problemas que ayuda a superar**
+> **Problemas que ayuda a superar**<br>
 > - Errores de workflow detectados tarde (solo al hacer push)
 > - Cambios de infraestructura que rompen entornos de prueba o producción
 > - Largas esperas de ejecución de GitHub Actions para cada cambio menor
 > - Dificultad para depurar errores de configuración de Terraform en el CI/CD
 
-#### 🔗 Referencias file()
+> [!TIP]
+> Lo más común es usar `act` para probar hasta el `terraform plan` y reservar el `apply` para el pipeline en GitHub Actions (con approvals).
+
+#### 🔗 Referencias
 - [file Function](https://developer.hashicorp.com/terraform/language/functions/file)
 
 ---
