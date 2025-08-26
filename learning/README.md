@@ -17,12 +17,14 @@
 ### ⚡ Ejecutar workflows localmente con `act` <a name="local-act"></a>
 - El `act` es una herramienta de línea de comandos que te permite ejecutar **GitHub Actions** de forma local, simulando el comportamiento de los **runners de GitHub** sin necesidad de hacer `push` a un repo remoto. 
 - Es especialmente útil para probar workflows antes de subirlos, ahorrar tiempo y depurar errores rápidamente.
-- Internamente, `act` crea contenedores **Docker** que simulan los **GitHub runners**, por lo que necesitas tener Docker instalado.
 - Algunos puntos clave:
     - `act` interpreta tu `.github/workflows/*.yml` y ejecuta los jobs localmente.
     - Puede usar **Docker containers** para simular los runners de GitHub.
     - Soporta eventos simulados, como `push`, `pull_request`, `workflow_dispatch`, etc.
     - Permite pasar secrets y variables como si fueran del entorno real de GitHub Actions.
+    
+> [!NOTE]
+> Internamente, `act` crea contenedores **Docker** que simulan los **GitHub runners**, por lo que necesitas tener Docker instalado.
 
 #### 🔗 Referencias workflows localmente con `act`
 - [act to run the actions locally](https://github.com/nektos/act)
