@@ -61,13 +61,13 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
     <p align="center">
         <img src="imagenes/dry-run.png" alt="dry-run" width="80%">
     </p>
-    
+
 > [!NOTE]  
-> # Con -n muestra SOLO lo que haría:<br>
-> ✓ Qué jobs ejecutaría
-> ✓ Qué pasos correría  
-> ✓ Qué imágenes Docker usaría
-> ✗ NO ejecuta nada realmente  
+> **Con -n muestra SOLO lo que haría:**<br>
+> ✓ Qué jobs ejecutaría<br>
+> ✓ Qué pasos correría<br>
+> ✓ Qué imágenes Docker usaría<br>
+> ✗ NO ejecuta nada realmente
 
 4. Ejecutar el workflow
     ```bash
