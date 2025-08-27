@@ -2,8 +2,6 @@ name: Terraform MVP
 
 # Solo ejecución manual
 on:
-  push:
-    branches: [ main, develop ]
   workflow_dispatch:
 
 jobs:
