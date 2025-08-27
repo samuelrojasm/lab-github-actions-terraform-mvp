@@ -111,9 +111,13 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
     COPY entrypoint.sh /entrypoint.sh
     ENTRYPOINT ["/entrypoint.sh"]
     ```
+- 
 > [!NOTE]
 > - **Docker container action**: Es una acción específica dentro del workflow, empaquetada como imagen Docker, que puede correr dentro de un runner (hosted o self-hosted).
 > - **Docker container action** es una unidad de trabajo en contenedor que el runner ejecuta.
+> - Es solo un step dentro de un job.
+> - Ese step en particular corre dentro del contenedor que definiste (por ejemplo con un Dockerfile).
+> - No tiene control del workflow completo, solo de lo que sucede en ese paso.
 
 ---
 
