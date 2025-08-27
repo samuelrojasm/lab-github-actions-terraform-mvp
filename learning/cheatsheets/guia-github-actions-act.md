@@ -66,7 +66,7 @@
 
 ## ⚙️ Ejecución por primera vez
 - Cuando se ejecuta por primera vez, `act` solicita la selección de la imagen Docker que va a ser usada por default.
-- Guarda la información en `/Users/srojas/Library/Application Support/act/actrc`
+- Guarda la información en `~/Library/Application\ Support/act/actrc`
 - La recomendación es usar al menos la imagen **Medium**
     <p align="center">
         <img src="../../imagenes/act-select-image.png" alt="act-select-image" width="90%">
