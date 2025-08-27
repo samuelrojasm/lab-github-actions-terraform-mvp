@@ -52,14 +52,22 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
 - Cuando se ejecuta por primera vez, `act` solicita la selección de la imagen Docker que va a ser usada por default.
 - La recomendación es usar al menos la imagen **Medium**
     <p align="center">
-        <img src="imagenes/act-select-image.png" alt="act-select-image" width="90%">
+        <img src="imagenes/act-select-image.png" alt="act-select-image" width="80%">
     </p>
-3. Ejecutar el workflow
+3. Ejecución dry-run (simulada)
     ```bash
     act workflow_dispatch -v
     ```
     <p align="center">
-        <img src="imagenes/act-exec.png" alt="act-exec" width="90%">
+        <img src="imagenes/dry-run.png" alt="dry-run" width="80%">
+    </p>
+
+4. Ejecutar el workflow
+    ```bash
+    act workflow_dispatch -v
+    ```
+    <p align="center">
+        <img src="imagenes/act-exec.png" alt="act-exec" width="80%">
     </p>
 
 ---
