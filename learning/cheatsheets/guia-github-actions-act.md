@@ -47,14 +47,26 @@
     ```
 
     ```bash
+    # Ver todos los eventos disponibles en el repo
+    act -l
+    ```
+
+    ```bash
     # Ejecutar un workflow específico por evento (simular un evento)
     act pull_request
     ```
 
+- jobs específicos 
     ```bash
-    # Lista todos lo workflows y Jobs del trigger en el repositorio
+    # Ver jobs específicos de pull_request (si existieran)
     act pull_request -l
     ```
+
+    ```bash
+    # Ver jobs específicos de workflow_dispatch (si existieran)
+    act workflow_dispatch -l
+    ```
+
 - Ejecución dry-run
     ```bash
     # Ejecutar evento pull_request en dry-run (ejecución simulada)

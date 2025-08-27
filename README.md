@@ -54,6 +54,16 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
     <p align="center">
         <img src="imagenes/act-select-image.png" alt="act-select-image" width="80%">
     </p>
+3. Verificar si act detecta el workflow
+- Ver jobs específicos de workflow_dispatch
+    ```bash
+    # Ver jobs específicos de workflow_dispatch (si existieran)
+    act workflow_dispatch -l
+    ```
+    <p align="center">
+        <img src="imagenes/lista-jobs.png" alt="lista-jobs" width="80%">
+    </p>
+
 3. Ejecución dry-run (simulada)
     ```bash
     act workflow_dispatch -v
