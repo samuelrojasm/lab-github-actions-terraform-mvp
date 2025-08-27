@@ -11,6 +11,7 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
 - Git Hub Actions
 - Terraform
 - act
+- Docker
 
 ---
 
@@ -29,7 +30,16 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
 ---
 
 ## 🛠 Bloques de construcción (building blocks - the basic things that are put together to make something exist)
-
+1. Archivos de Terraform
+    - main.tf
+    - terraform.tf
+    - variables.tf
+    - outputs.tf
+2. Github Actions workflow de Terraform
+    - terraform.yml
+3. Docker Desktop para macOs
+4. Open Source tool
+    - act (ejecución local de workflow)
 
 ---
 
@@ -38,18 +48,25 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
     ```bash
     open -a Docker
     ```
-2. Ejecutar el workflow
+2. Selección de imagen
+- Cuando se ejecuta por primera vez, `act` solicita la selección de la imagen Docker que va a ser usada por default.
+- La recomendación es usar al menos la imagen **Medium**
+    <p align="center">
+        <img src="imagenes/act-select-image.png" alt="act-select-image" width="90%">
+    </p>
+3. Ejecutar el workflow
     ```bash
-    act workflow_dispatch
+    act workflow_dispatch -v
     ```
-3. 
-
-
+    <p align="center">
+        <img src="imagenes/act-exec.png" alt="act-exec" width="90%">
+    </p>
 
 ---
 
 ## 🔗 Referencias
-- []( )
+- [Guia de uso de "act" en Git Hub Actions](https://github.com/samuelrojasm/lab-github-actions-terraform-mvp/blob/main/learning/cheatsheets/guia-github-actions-act.md)
+- [Diario de aprendizaje del lab: Github Actions + Terraform + act](https://github.com/samuelrojasm/lab-github-actions-terraform-mvp/tree/main/learning)
 
 ---
 
