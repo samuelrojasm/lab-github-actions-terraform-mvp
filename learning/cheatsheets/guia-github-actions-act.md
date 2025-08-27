@@ -64,6 +64,15 @@
 
 ---
 
+## ⚙️ Ejecución por primera vez
+- Cuando se ejecuta por primera vez, `act` solicita la selección de la imagen Docker que va a ser usada por default.
+- Guarda la información en `/Users/srojas/Library/Application Support/act/actrc`
+- La recomendación es usar al menos la imagen **Medium**
+    <p align="center">
+        <img src="imagenes/act-select-image.png" alt="act-select-image" width="90%">
+    </p>
+
+
 ## ⚙️ Elección de imagen (runner Docker)
 - Por defecto, `act` usa una imagen base pequeña (`nektos/act-environments-ubuntu:18.04`)
 - Si necesitas algo más parecido a `ubuntu-latest` de GitHub, puedes elegir otra imagen:
