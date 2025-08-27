@@ -1,4 +1,4 @@
-# 🧪 Guía de Git Hub Actions + Act (pruebas locales)
+# 🧪 Guía de GitHub Actions + Act (pruebas locales)
 
 ## ⚙️ ¿Qué es act?
 - Es una herramienta de código abierto escrita en Go.
