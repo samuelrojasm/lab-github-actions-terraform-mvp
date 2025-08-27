@@ -40,8 +40,7 @@
     ```bash
     open -a Docker
     ```
-
-- Comandos de uo de `act`
+- Comandos de `act`
     ```bash
     # Ejecutar el workflow por defecto (evento push)
     act
@@ -56,24 +55,24 @@
     # Lista todos lo workflows y Jobs del trigger en el repositorio
     act pull_request -l
     ```
-
 - Ejecución dry-run
     ```bash
     # Ejecutar evento pull_request en dry-run (ejecución simulada)
     act pull_request -n
     ```
-> > [!NOTE]  
+> [!NOTE]  
 > # Con -n muestra SOLO lo que haría:<br>
 > ✓ Qué jobs ejecutaría
 > ✓ Qué pasos correría  
 > ✓ Qué imágenes Docker usaría
 > ✗ NO ejecuta nada realmente    
 
+- Manejo de secretos:
     ```bash
-   # Pasar secrets locales como variables de Terraform
-   act -s TF_VAR_region=us-east-1 -s AWS_ACCESS_KEY_ID=xxx -s AWS_SECRET_ACCESS_KEY=xxx
+    # Pasar secrets locales como variables de Terraform
+    act -s TF_VAR_region=us-east-1 -s AWS_ACCESS_KEY_ID=xxx -s AWS_SECRET_ACCESS_KEY=xxx
     ```
-
+- Jobs individuales
     ```bash
     # Ejecuta solo el job 'terraform'
     act -j terraform
