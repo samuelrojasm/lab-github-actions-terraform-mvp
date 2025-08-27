@@ -69,7 +69,7 @@
 - Guarda la información en `/Users/srojas/Library/Application Support/act/actrc`
 - La recomendación es usar al menos la imagen **Medium**
     <p align="center">
-        <img src="imagenes/act-select-image.png" alt="act-select-image" width="90%">
+        <img src="../../imagenes/act-select-image.png" alt="act-select-image" width="90%">
     </p>
 
 
