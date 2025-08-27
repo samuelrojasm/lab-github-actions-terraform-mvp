@@ -53,6 +53,16 @@
     ```
 
     ```bash
+    # Lista todos lo workflows y Jobs del trigger en el repositorio
+    act pull_request -l
+    ```
+
+    ```bash
+    # Ejecutar evento pull_request en dry-run (ejecución simulada)
+    act pull_request -n
+    ```
+
+    ```bash
    # Pasar secrets locales como variables de Terraform
    act -s TF_VAR_region=us-east-1 -s AWS_ACCESS_KEY_ID=xxx -s AWS_SECRET_ACCESS_KEY=xxx
     ```
