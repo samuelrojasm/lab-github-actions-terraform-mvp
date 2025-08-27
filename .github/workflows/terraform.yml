@@ -35,3 +35,13 @@ jobs:
           echo "✅ Validation passed"
           echo "✅ Plan completed"
           echo "Files created will be in workspace"
+      
+      - name: Show Errors
+        if: failure()
+        run: |
+          echo "❌ Something went wrong"
+
+      - name: Show Message
+        if: always() # Se ejecuta sin importar fallos anteriores
+        run: |
+          echo "Workflow completed (check individual steps for status)"
