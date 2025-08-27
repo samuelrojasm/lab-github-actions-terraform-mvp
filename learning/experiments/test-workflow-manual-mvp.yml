@@ -1,0 +1,34 @@
+name: Terraform MVP
+
+# Solo ejecución manual
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+      
+      - name: Terraform Init
+        run: terraform init
+      
+      - name: Terraform Validate
+        run: terraform validate
+      
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+      
+      - name: Show Results
+        run: |
+          echo "✅ Validation passed"
+          echo "✅ Plan completed"
+          echo "Files created will be in workspace"

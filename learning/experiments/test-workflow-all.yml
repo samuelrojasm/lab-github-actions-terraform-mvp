@@ -1,0 +1,104 @@
+name: Terraform CI/CD
+
+# Triggers - cuándo se ejecuta el workflow
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Permite ejecutar manualmente
+
+# Variables de entorno globales
+env:
+  TF_VERSION: 1.6.0
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    
+    # Permisos necesarios
+    permissions:
+      contents: read
+      pull-requests: write  # Para comentarios en PR
+    
+    # Variables de entorno del job
+    env:
+      TERRAFORM_DIR: .  # Directorio donde está tu código Terraform
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Versión más reciente
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3  # Versión más reciente
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false  # Para mejor output en logs
+      
+      # Validación de formato
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+        continue-on-error: false
+      
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ${{ env.TERRAFORM_DIR }}
+      
+      # Validación de sintaxis
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ${{ env.TERRAFORM_DIR }}
+      
+      - name: Terraform Plan
+        id: plan
+        run: |
+          terraform plan -detailed-exitcode -out=tfplan
+          echo "plan_exit_code=$?" >> $GITHUB_OUTPUT
+        working-directory: ${{ env.TERRAFORM_DIR }}
+        continue-on-error: true
+      
+      # Solo aplicar en push a main (no en PRs)
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve tfplan
+        working-directory: ${{ env.TERRAFORM_DIR }}
+      
+      # Comentar en PR con el resultado del plan
+      - name: Comment PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `
+            #### Terraform Format and Style 🖌\`${{ steps.plan.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.plan.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+            
+            <details><summary>Show Plan</summary>
+            
+            \`\`\`terraform
+            ${{ steps.plan.outputs.stdout }}
+            \`\`\`
+            
+            </details>
+            
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
+      
+      # Subir archivos generados como artefactos
+      - name: Upload Terraform Plan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: |
+            ${{ env.TERRAFORM_DIR }}/tfplan
+            ${{ env.TERRAFORM_DIR }}/*.txt  # Tu output.txt
+          retention-days: 30
