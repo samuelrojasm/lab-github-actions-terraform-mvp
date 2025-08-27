@@ -57,10 +57,17 @@
     act pull_request -l
     ```
 
+- Ejecución dry-run
     ```bash
     # Ejecutar evento pull_request en dry-run (ejecución simulada)
     act pull_request -n
     ```
+> > [!NOTE]  
+> # Con -n muestra SOLO lo que haría:<br>
+> ✓ Qué jobs ejecutaría
+> ✓ Qué pasos correría  
+> ✓ Qué imágenes Docker usaría
+> ✗ NO ejecuta nada realmente    
 
     ```bash
    # Pasar secrets locales como variables de Terraform
