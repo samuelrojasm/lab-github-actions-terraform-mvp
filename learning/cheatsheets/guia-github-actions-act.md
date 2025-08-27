@@ -32,6 +32,8 @@
     # Verifica la versión de act
     act --version
     ```
+> [!NOTE]  
+> - `act` usa **Docker**, así que necesitas tener **Docker Desktop** corriendo en la Mac.
 
 ## ⚙️ Comandos
 -  Iniciar Docker Desktop en macOS:

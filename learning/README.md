@@ -12,6 +12,7 @@
 - [Beneficios de usar act con Terraform](#act-terraform)
 - [Archivo terraform.tfstate en act](#act-tfstate)
 - [Docker container actions](#docker-container-action)
+- [Opciones para evitar ejecuciones no deseadas](#ejecuciones-no-deseadas)
 
 ---
 
@@ -118,6 +119,37 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 > - Es solo un step dentro de un job.
 > - Ese step en particular corre dentro del contenedor que definiste (por ejemplo con un Dockerfile).
 > - No tiene control del workflow completo, solo de lo que sucede en ese paso.
+
+---
+
+### ⚡ Opciones para evitar ejecuciones no deseadas <a name="ejecuciones-no-deseadas"></a>
+#### Problema
+- Cuando estamos construyendo los workflows de GitHub Actions e IaC en paralelo en una rama de trabajo, y todavía no queremos que se ejecute el workflow de GitHub Actions cada vez que se hacen `merges` a `main`.
+- Tenemos un workflow YAML en `.github/workflows/terraform.yml`.
+- Cada vez que se hace `merge` a `main`, se dispara automáticamente porque en el `on:` está definido `push: branches: [ main ]`.
+- Pero para el caso de fase de documentar / iterar, y no queremos que corra todavía el workflow de GitHub Actions.
+#### Opciones para evitar ejecuciones no deseadas
+1. Usar solo workflow_dispatch al inicio
+- Al principio definir el workflow para que se ejecute solo manualmente:
+    ```yaml
+    on:
+        workflow_dispatch:
+    ```
+- Así es posible hacer `merge`, documentar y experimentar en `main` sin que corra nada.
+- Más adelante, cuando ya esté estable, agregar:
+    ```yaml
+    on:
+        push:
+            branches: [ main ]
+        pull_request:
+            branches: [ main ]
+        workflow_dispatch:
+    ```
+2. Condiciones (if:) en los jobs
+
+
+
+
 
 ---
 
