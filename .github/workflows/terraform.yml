@@ -1,42 +1,34 @@
-name: Terraform CI/CD
+name: Terraform MVP
 
+# Solo ejecución manual
 on:
   workflow_dispatch:
 
 jobs:
-  terraform_plan:
+  terraform:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v3
-
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.0
-
+      
       - name: Terraform Init
         run: terraform init
-
+      
       - name: Terraform Validate
         run: terraform validate
-
+      
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
-
-  terraform_apply:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    needs: terraform_plan
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.6.0
-
-      - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        id: plan
+        run: terraform plan
+      
+      - name: Show Results
+        run: |
+          echo "✅ Validation passed"
+          echo "✅ Plan completed"
+          echo "Files created will be in workspace"
