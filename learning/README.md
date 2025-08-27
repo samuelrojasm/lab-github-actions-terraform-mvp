@@ -243,6 +243,6 @@ flowchart TD
 ---
 
 #### 🔗 Referencias
-- [file Function](https://developer.hashicorp.com/terraform/language/functions/file)
+- [Documentación act](https://github.com/nektos/act)
 
 ---
