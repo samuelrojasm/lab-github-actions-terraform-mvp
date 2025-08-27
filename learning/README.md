@@ -179,34 +179,36 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 
 ### ⚡ Flujo completo recomendado: Terraform + GitHub Actions + act, aplicando Trunk-Based Development<a name="flujo-completo"></a>
 1. Desarrollo en ramas cortas (feature branches)
-- Se crean ramas pequeñas (`feature/ajuste-bucket`, `fix/variable-region`, etc.).
-- En esta rama se hacen los cambios de Terraform.
+    - Se crean ramas pequeñas (`feature/ajuste-bucket`, `fix/variable-region`, etc.).
+    - En esta rama se hacen los cambios de Terraform.
 2. Pull Request hacia `main`
-- Antes de hacer `merge`, se abre un PR a `main`.
-- En el PR se ejecuta el workflow de Terraform Plan para mostrar qué cambios se harían.
-- El equipo revisa el `plan` (es como un preview de la infraestructura).
+    - Antes de hacer `merge`, se abre un PR a `main`.
+    - En el PR se ejecuta el workflow de Terraform Plan para mostrar qué cambios se harían.
+    - El equipo revisa el `plan` (es como un preview de la infraestructura).
 3. Merge a`main`
-- Una vez aprobado, se hace merge a `main`.
-- El workflow de `main` ejecuta el `plan` automáticamente.
-- El `apply` no corre automáticamente → se deja bajo control de `workflow_dispatch` (approval manual).
+    - Una vez aprobado, se hace merge a `main`.
+    - El workflow de `main` ejecuta el `plan` automáticamente.
+    - El `apply` no corre automáticamente → se deja bajo control de `workflow_dispatch` (approval manual).
 4. Deploy controlado (`terraform apply`)
-- Cuando se decide aplicar los cambios, alguien dispara manualmente el workflow (`workflow_dispatch`).
-- Ahí sí se hace `terraform apply` con el `tfplan` validado previamente.
+    - Cuando se decide aplicar los cambios, alguien dispara manualmente el workflow (`workflow_dispatch`).
+    - Ahí sí se hace `terraform apply` con el `tfplan` validado previamente.
 #### Beneficio de este enfoque
 - **Ramas cortas** → menos conflictos y cambios más fáciles de revisar.
 - **Plan en PR** → transparencia, todos ven qué infraestructura se va a cambiar antes de aplicarla.
 - **Merge seguro a main** → no aplica automáticamente, solo genera plan.
 - **Apply manual** → control, approvals y reducción de riesgos en producción.
 #### ¿Y act dónde entra?
-- Lo usas antes del PR para probar el workflow en tu máquina:
+- Usar antes del PR para probar el workflow en tu máquina:
     - `act -j terraform_plan` → validas que el plan funciona.
     - Ahorro de `push` innecesarios y errores en el pipeline real.
 - Luego subir la rama con confianza de que en GitHub Actions se verá igual.
 > [!NOTE]
-> **Resumen: En un flujo Trunk-Based Development con Terraform:**
+> **Resumen: En un flujo Trunk-Based Development con Terraform:**<br>
 > Se trabaja en ramas cortas,
 > `plan` corre en PR y en `main`,
 > `apply` queda bajo approval manual con `workflow_dispatch`.
+
+---
 
 ### ⚡ Diagrama que representa el flujo Trunk-Based Development con Terraform y GitHub Actions<a name="diagrama-trunk-based"></a>
 ```mermaid
