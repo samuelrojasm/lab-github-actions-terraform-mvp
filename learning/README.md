@@ -11,6 +11,7 @@
 - [Ejecutar workflows localmente con "act"](#local-act)
 - [Beneficios de usar act con Terraform](#act-terraform)
 - [Archivo terraform.tfstate en act](#act-tfstate)
+- [Docker container actions](#docker-container-action)
 
 ---
 
@@ -87,6 +88,32 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 > **Lo típico en un proyecto serio es:**<br>
 > - Usar `plan` con `act` para validar que el workflow corre bien.
 > - Usar backend remoto para el `state`, y dejar el `apply` solo en GitHub Actions (con approval).
+
+---
+
+### ⚡ Docker container actions <a name="docker-container-action"></a>
+- **Qué son:** Son un tipo de acción personalizada que empaquetas dentro de una imagen Docker.
+- **Características:** 
+    - El código de la acción se ejecuta dentro del contenedor que definas en un Dockerfile.
+    - Esto te permite controlar totalmente el entorno de ejecución: dependencias, librerías, sistema base, etc.
+    - Son útiles cuando quieres que tu acción sea portátil y reproducible en cualquier runner (hosted o self-hosted).
+- Ejemplo de definición de acción:
+    ```yaml
+    # action.yml
+    name: "Mi acción en Docker"
+    runs:
+        using: "docker"
+        image: "Dockerfile"
+    ```
+- Dockerfile
+    ```dockerfile
+    FROM node:20-alpine
+    COPY entrypoint.sh /entrypoint.sh
+    ENTRYPOINT ["/entrypoint.sh"]
+    ```
+> [!NOTE]
+> - **Docker container action**: Es una acción específica dentro del workflow, empaquetada como imagen Docker, que puede correr dentro de un runner (hosted o self-hosted).
+> - **Docker container action** es una unidad de trabajo en contenedor que el runner ejecuta.
 
 ---
 
