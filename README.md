@@ -14,7 +14,22 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
 
 ---
 
+## ⚙ Este MVP del workflow de GitHub Actions incluye solo lo esencial
+- Trigger:
+    - `workflow_dispatch`: - Solo ejecución manual
+    - No se ejecuta con push, pull request ni nada automático
+- Pasos básicos:
+    - **Checkout** - Descargar código
+    - **Setup Terraform** - Instala Terraform 1.6.0
+    - **Init** - Inicializa Terraform
+    - **Validate** - Valida la sintaxis
+    - **Plan** - Genera el plan de ejecución
+    - **Show Results** - Mensaje simple de confirmación
+
+---
+
 ## 🛠 Bloques de construcción (building blocks - the basic things that are put together to make something exist)
+
 
 ---
 
