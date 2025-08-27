@@ -234,6 +234,12 @@ flowchart TD
     H --> I["Infraestructura actualizada en la nube"]
 ```
 
+- En este flujo se ve:
+    - El dev trabaja en ramas cortas.
+    - Al abrir un PR contra `main`, se genera un `terraform plan` para que el equipo revise.
+    - Cuando el PR se aprueba y se hace merge a `main`, se corre otro `plan`.
+    - El `apply` solo ocurre si alguien lo lanza manualmente vía `workflow_dispatch`.
+
 ---
 
 #### 🔗 Referencias
