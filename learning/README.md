@@ -204,9 +204,9 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
 - Luego subir la rama con confianza de que en GitHub Actions se verá igual.
 > [!NOTE]
 > **Resumen: En un flujo Trunk-Based Development con Terraform:**<br>
-> Se trabaja en ramas cortas,<br>
-> `plan` corre en PR y en `main`,<br>
-> `apply` queda bajo approval manual con `workflow_dispatch`.
+> - Se trabaja en ramas cortas,
+> - `plan` corre en PR y en `main`,
+> - `apply` queda bajo approval manual con `workflow_dispatch`.
 
 ---
 
