@@ -73,7 +73,7 @@
 
 4. Ejecución dry-run (simulada)
     ```bash
-    act workflow_dispatch -v
+    act workflow_dispatch -n
     ```
     <p align="center">
         <img src="imagenes/dry-run.png" alt="dry-run" width="80%">
