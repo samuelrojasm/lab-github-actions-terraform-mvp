@@ -34,6 +34,16 @@ La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejo
 ---
 
 ## 🚀 Demostración y Prueba del laboratorio (El MVP Funcional)
+1. Iniciar Docker Desktop en macOS:
+    ```bash
+    open -a Docker
+    ```
+2. Ejecutar el workflow
+    ```bash
+    act workflow_dispatch
+    ```
+3. 
+
 
 
 ---
