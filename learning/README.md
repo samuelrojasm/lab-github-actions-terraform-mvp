@@ -13,6 +13,8 @@
 - [Archivo terraform.tfstate en act](#act-tfstate)
 - [Docker container actions](#docker-container-action)
 - [Opciones para evitar ejecuciones no deseadas](#ejecuciones-no-deseadas)
+- [Flujo completo con Terraform + GitHub Actions + act, aplicando Trunk-Based Development](#flujo-completo)
+- [Diagrama que representa el flujo Trunk-Based Development con Terraform y GitHub Actions](#diagrama-trunk-based)
 
 ---
 
@@ -146,10 +148,89 @@ Permite probar workflows de **GitHub Actions** localmente, ahorrando tiempo, dep
         workflow_dispatch:
     ```
 2. Condiciones (if:) en los jobs
+- Condicionar la ejecución a que exista un archivo o variable específica, por ejemplo:
+    ```yaml
+    jobs:
+        terraform_plan:
+            if: github.event_name != 'push'
+            runs-on: ubuntu-latest
+            steps:
+                ...
+    ```
+- Eso haría que en `push` a `main` no se ejecute nada, pero sí en PR o manual.
+3. Workflows en rama separada (`.github/workflows-dev/`)
+- Otra práctica es trabajar en workflows fuera de `.github/workflows/` (por ejemplo, en una carpeta `workflows-dev/`) mientras se desarrolla.
+- GitHub solo ejecuta lo que esté dentro de `.github/workflows/`.
+- Cuando ya estén listos, se mueven a `.github/workflows/`.
+4. Feature flag en el YAML
+- Poner una condición basada en un secret o variable (ejemplo: `ENABLE_TERRAFORM=true`).
+- Así el workflow solo corre si lo habilitamos:
+    ```yaml
+    jobs:
+        terraform_plan:
+            if: ${{ vars.ENABLE_TERRAFORM == 'true' }}
+    ```
+> [!NOTE]
+> **Práctica común**
+> Empezar con `workflow_dispatch` solamente, hasta que el workflow sea estable.
+> Luego añadir `push`/`pull_request` a `main`.
 
+---
 
+### ⚡ Flujo completo recomendado: Terraform + GitHub Actions + act, aplicando Trunk-Based Development<a name="flujo-completo"></a>
+1. Desarrollo en ramas cortas (feature branches)
+- Se crean ramas pequeñas (`feature/ajuste-bucket`, `fix/variable-region`, etc.).
+- En esta rama se hacen los cambios de Terraform.
+2. Pull Request hacia `main`
+- Antes de hacer `merge`, se abre un PR a `main`.
+- En el PR se ejecuta el workflow de Terraform Plan para mostrar qué cambios se harían.
+- El equipo revisa el `plan` (es como un preview de la infraestructura).
+3. Merge a`main`
+- Una vez aprobado, se hace merge a `main`.
+- El workflow de `main` ejecuta el `plan` automáticamente.
+- El `apply` no corre automáticamente → se deja bajo control de `workflow_dispatch` (approval manual).
+4. Deploy controlado (`terraform apply`)
+- Cuando se decide aplicar los cambios, alguien dispara manualmente el workflow (`workflow_dispatch`).
+- Ahí sí se hace `terraform apply` con el `tfplan` validado previamente.
+#### Beneficio de este enfoque
+- **Ramas cortas** → menos conflictos y cambios más fáciles de revisar.
+- **Plan en PR** → transparencia, todos ven qué infraestructura se va a cambiar antes de aplicarla.
+- **Merge seguro a main** → no aplica automáticamente, solo genera plan.
+- **Apply manual** → control, approvals y reducción de riesgos en producción.
+#### ¿Y act dónde entra?
+- Lo usas antes del PR para probar el workflow en tu máquina:
+    - `act -j terraform_plan` → validas que el plan funciona.
+    - Ahorro de `push` innecesarios y errores en el pipeline real.
+- Luego subir la rama con confianza de que en GitHub Actions se verá igual.
+> [!NOTE]
+> **Resumen: En un flujo Trunk-Based Development con Terraform:**
+> Se trabaja en ramas cortas,
+> `plan` corre en PR y en `main`,
+> `apply` queda bajo approval manual con `workflow_dispatch`.
 
+### ⚡ Diagrama que representa el flujo Trunk-Based Development con Terraform y GitHub Actions<a name="diagrama-trunk-based"></a>
+```mermaid
+flowchart TD
+    subgraph Dev["Ramas de desarrollo (feature/*)"]
+        A["Commit cambios Terraform"] --> B["Push a feature/*"]
+    end
 
+    B --> C["Pull Request a main"]
+
+    subgraph CI["GitHub Actions - PR"]
+        C --> D["Terraform Plan (preview)"]
+        D --> E["Revisión de equipo / aprobación PR"]
+    end
+
+    E --> F["Merge a main"]
+
+    subgraph CD["GitHub Actions - main"]
+        F --> G["Terraform Plan automático"]
+        G -->|workflow_dispatch manual| H["Terraform Apply (con approval)"]
+    end
+
+    H --> I["Infraestructura actualizada en la nube"]
+```
 
 ---
 
