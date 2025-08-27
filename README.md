@@ -1,17 +1,21 @@
-# 🧪 Lab Personal: Despliegue de infraestructura con Terraform y GitHub Actions
+# 🧪 Lab Personal: MPV de despliegue de infraestructura con Terraform + GitHub Actions
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-## 🎯 Objetivos
-La idea es hacer un workflow minimalista, seguro y funcional, que cubra las mejores prácticas: `terraform plan` automático en cada `push` y `terraform apply` manual via `workflow_dispatch`. Empezamos con `backend local`, luego podemos migrar a remoto como mejora.
+> Implementación básica para automatizar despliegues de infraestructura usando Terraform y GitHub Actions, con testing local mediante Act.
+
+## 🎯 Objetivos del MPV
+- Validación automática de código Terraform
+- Ejecución de planes de despliegue
+- Testing local con Act
+- Workflow manual para experimentación
 
 ---
 
 ## ⚙ Tecnolgías usadas
+- Terraform 1.13.0
 - Git Hub Actions
-- Terraform
-- act
-- Docker
+- Docker + Act (testing local)
 
 ---
 
