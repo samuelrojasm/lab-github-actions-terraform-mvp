@@ -98,9 +98,9 @@
     act push
     ```
 - Salida al ejecuarlo
-    > [CI/build] 🚀  Start image=nektos/act-environments-ubuntu:22.04
-    > [CI/build]   ✅  Success - actions/checkout@v4
-    > [CI/build]   ✅  Run echo "Hola desde GitHub Actions en act"
+    > [CI/build] 🚀  Start image=nektos/act-environments-ubuntu:22.04<br>
+    > [CI/build]   ✅  Success - actions/checkout@v4<br>
+    > [CI/build]   ✅  Run echo "Hola desde GitHub Actions en act"<br>
     > Hola desde GitHub Actions en act
 
 ---
