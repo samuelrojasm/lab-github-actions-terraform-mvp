@@ -8,6 +8,8 @@
 - Es una herramienta de línea de comandos que simula los runners de **GitHub Actions** localmente usando Docker.
 - Permite ejecutar workflows completos o **jobs** específicos sin necesidad de hacer push al repositorio remoto.
 - Soporta eventos simulados: `push`, `pull_request`, `workflow_dispatch`, etc.
+> [!NOTE]  
+> `act` es útil sobre todo para desarrollar, probar y depurar workflows y acciones rápidamente, sin esperar a GitHub y sin gastar minutos.
 
 ---
 
@@ -82,7 +84,7 @@
 ---
 
 ## ⚙️ Ejemplo
-- Supongamos que tienes `.github/workflows/ci.yml`:
+- Tenemos este archivo `.github/workflows/ci.yml`:
     ```yaml
     name: CI
     on: [push]
@@ -103,6 +105,24 @@
     > [CI/build]   ✅  Run echo "Hola desde GitHub Actions en act"<br>
     > Hola desde GitHub Actions en act
 
+---
+
+## ⚙️ Ejemplo de ejecución de job
+- Pipeline de Terraform:
+    ```yaml
+    jobs:
+        validate:
+            runs-on: ubuntu-latest
+            steps:
+                - uses: actions/checkout@v4
+                - name: Terraform fmt
+                  run: terraform fmt -check
+    ```
+- En lugar de hacer `commit` y `push` cada vez que se corrige algo en el **YAML**, se pruebas así:
+    ```bash
+    act -j validate
+    ```
+    > En segundos ves si Terraform corre bien en la máquina con el workflow.
 ---
 
 ## 🔗 Referencias
