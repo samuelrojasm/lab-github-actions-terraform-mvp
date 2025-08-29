@@ -1,7 +1,10 @@
 # 🧪 Lab Personal: MPV de despliegue de infraestructura con Terraform + GitHub Actions
 
+[![Terraform](https://img.shields.io/badge/IaC-Terraform-623CE4?logo=terraform&logoColor=white)](#)
+[![HCL](https://img.shields.io/badge/Language-HCL-blueviolet)](#)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
+> [!NOTE]
 > Implementación básica para automatizar despliegues de infraestructura usando Terraform y GitHub Actions, con testing local mediante Act.
 
 ## 🎯 Objetivos del MPV
